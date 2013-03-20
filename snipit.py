@@ -44,10 +44,15 @@ class MainHandler(tornado.web.RequestHandler):
         self.render("templates/form.html", languages=LANGUAGES.iteritems())
 
     def post(self):
-        ''' Saves Paste to a file and redirect to display '''
+        ''' Saves Paste to a file and sends result to client '''
         language = self.get_argument("language")
         snippet = self.create_snippet(language, self.get_argument("text"))
-        self.redirect('/{0}/{1}'.format(snippet, language))
+        target_url = '/{0}/{1}'.format(snippet, language)
+
+        if "application/json" in self.request.headers.get("Accept", ""):
+            self.write({"code": 201, "message": "Created", "data": target_url})
+        else:
+            self.redirect(target_url)
 
 
 class PasteHandler(tornado.web.RequestHandler):
