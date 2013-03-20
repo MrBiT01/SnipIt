@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <form class="form-horizontal" method="post" action="/">
+        <div class="control-group">
+            <label class="control-label" for="inputText">Text</label>
+            <div class="controls">
+                <textarea id="inputText" name="text" placeholder="Paste your text here..."></textarea>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputLanguage">Language</label>
+            <div class="controls">
+                <select id="inputLanguage" name="language">
+                    {% for key, lang in languages %}
+                        <option value="{{key}}">{{lang}}</option> 
+                    {% end %}
+                </select>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn btn-inverse"><i class="icon-ok icon-white"> </i>Submit</button>
+            </div>
+        </div>
+    </form>
+{% end %}

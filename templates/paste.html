@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <pre class="brush:{{ lang }};">
+    {{ snippet }}
+    </pre>
+    <script type="text/javascript" src="/static/scripts/shCore.js"></script>
+    <script type="text/javascript" src="/static/scripts/shAutoloader.js"></script>
+	<script type="text/javascript">
+        function path()
+        {
+          var args = arguments,
+              result = [] ;
+            
+          for(var i = 0; i < args.length; i++)
+              result.push(args[i].replace('@', '/static/scripts/'));
+               
+          return result
+        };
+         
+        SyntaxHighlighter.autoloader.apply(null, path(
+          'bash shell             @shBrushBash.js',
+          'cpp c                  @shBrushCpp.js',
+          'c# c-sharp csharp      @shBrushCSharp.js',
+          'css                    @shBrushCss.js',
+          'diff patch pas         @shBrushDiff.js',
+		  'edi edifact            @shBrushEdifact.js',
+          'java                   @shBrushJava.js',
+          'js jscript javascript  @shBrushJScript.js',
+          'perl pl                @shBrushPerl.js',
+          'php                    @shBrushPhp.js',
+          'text plain             @shBrushPlain.js',
+          'py python              @shBrushPython.js',
+          'ruby rails ror rb      @shBrushRuby.js',
+          'sql                    @shBrushSql.js',
+          'vb vbnet               @shBrushVb.js',
+          'xml xhtml xslt html    @shBrushXml.js'
+        ));
+        SyntaxHighlighter.all();
+    </script>
+{% end %}
