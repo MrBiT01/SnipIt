@@ -36,7 +36,7 @@ class MainHandler(tornado.web.RequestHandler):
         paste_dir = self.settings["snippets_path"]
         fd, path = tempfile.mkstemp(dir=paste_dir, text=True, prefix=prefix)
         with os.fdopen(fd, 'w') as f:
-            f.write(text)
+            f.write(text.encode('utf-8'))
         return os.path.basename(path)
 
     def get(self):
